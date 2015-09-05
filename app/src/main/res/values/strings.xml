@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Mangocards</string>
+
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="login">Log In</string>
 </resources>
