@@ -8,4 +8,8 @@ public class LoginPresenter {
   public LoginPresenter(LoginView view) {
     this.view = view;
   }
+
+  public void doLogin() {
+
+  }
 }
