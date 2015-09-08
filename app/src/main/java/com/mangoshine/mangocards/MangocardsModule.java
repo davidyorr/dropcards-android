@@ -14,4 +14,8 @@ public class MangocardsModule {
   @Provides MangocardsApp provideMangocardsApp() {
     return app;
   }
+
+  @Provides DropboxManager provideAppSecret() {
+    return new DropboxManager(app);
+  }
 }

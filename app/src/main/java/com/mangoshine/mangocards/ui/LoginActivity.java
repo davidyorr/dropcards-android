@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.mangoshine.mangocards.DropboxManager;
 import com.mangoshine.mangocards.MangocardsApp;
 import com.mangoshine.mangocards.R;
 import com.mangoshine.mangocards.ui.module.LoginModule;
@@ -14,10 +15,11 @@ import javax.inject.Inject;
 public class LoginActivity extends Activity implements LoginView {
 
   @Inject LoginPresenter presenter;
+  @Inject DropboxManager dropboxManager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this)).inject(this);
+    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this, dropboxManager)).inject(this);
 
     setContentView(R.layout.activity_login);
     ButterKnife.bind(this);
@@ -29,14 +31,6 @@ public class LoginActivity extends Activity implements LoginView {
   }
 
   @Override public void loginSuccessful() {
-
-  }
-
-  @Override public void showProgress() {
-
-  }
-
-  @Override public void hideProgress() {
 
   }
 
