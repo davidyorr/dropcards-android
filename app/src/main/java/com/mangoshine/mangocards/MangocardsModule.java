@@ -15,7 +15,7 @@ public class MangocardsModule {
     return app;
   }
 
-  @Provides DropboxManager provideAppSecret() {
+  @Provides DropboxManager provideDropboxManager() {
     return new DropboxManager(app);
   }
 }
