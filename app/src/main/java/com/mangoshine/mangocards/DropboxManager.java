@@ -3,6 +3,7 @@ package com.mangoshine.mangocards;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.widget.Toast;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AppKeyPair;
@@ -29,6 +30,18 @@ public class DropboxManager {
 
   public void startOAuth2Authentication() {
     dropboxApi.getSession().startOAuth2Authentication(context);
+  }
+
+  public void finishAuthentication() {
+    AndroidAuthSession session = dropboxApi.getSession();
+    if (session.authenticationSuccessful()) {
+      try {
+        session.finishAuthentication();
+        storeAuth(session);
+      } catch (IllegalStateException e) {
+        Toast.makeText(context, "Couldn't authenticate with Dropbox:" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+      }
+    }
   }
 
   private void loadAuth(AndroidAuthSession session) {

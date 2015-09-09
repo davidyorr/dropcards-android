@@ -15,4 +15,8 @@ public class LoginPresenter {
   public void doLogin() {
     dropboxManager.startOAuth2Authentication();
   }
+
+  public void finishAuthentication() {
+    dropboxManager.finishAuthentication();
+  }
 }

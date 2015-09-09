@@ -25,6 +25,11 @@ public class LoginActivity extends Activity implements LoginView {
     ButterKnife.bind(this);
   }
 
+  @Override protected void onResume() {
+    super.onResume();
+    presenter.finishAuthentication();
+  }
+
   @OnClick(R.id.login_button)
   public void onLoginClicked() {
     presenter.doLogin();
