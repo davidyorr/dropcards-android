@@ -1,6 +1,7 @@
 package com.mangoshine.mangocards.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,10 +20,13 @@ public class LoginActivity extends Activity implements LoginView {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this, dropboxManager)).inject(this);
+    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this, dropboxManager)).inject(
+        this);
 
     setContentView(R.layout.activity_login);
     ButterKnife.bind(this);
+
+    presenter.checkAuthenticated();
   }
 
   @Override protected void onResume() {
@@ -36,15 +40,16 @@ public class LoginActivity extends Activity implements LoginView {
   }
 
   @Override public void loginSuccessful() {
-
+    navigateToHome();
   }
 
   @Override public void showAuthenticationError() {
 
   }
 
-  @Override public void navigateToDashboard() {
-
+  @Override public void navigateToHome() {
+    Intent intent = new Intent(this, HomeActivity.class);
+    startActivity(intent);
   }
 
 }

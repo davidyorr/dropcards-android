@@ -5,5 +5,5 @@ public interface LoginView {
 
   void showAuthenticationError();
 
-  void navigateToDashboard();
+  void navigateToHome();
 }

@@ -12,11 +12,19 @@ public class LoginPresenter {
     this.dropboxManager = dropboxManager;
   }
 
+  public void checkAuthenticated() {
+    if (dropboxManager.isAuthenticated()) {
+      view.loginSuccessful();
+    }
+  }
+
   public void doLogin() {
     dropboxManager.startOAuth2Authentication();
   }
 
   public void finishAuthentication() {
-    dropboxManager.finishAuthentication();
+    if (dropboxManager.finishAuthentication()) {
+      view.loginSuccessful();
+    }
   }
 }

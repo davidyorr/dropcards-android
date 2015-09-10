@@ -32,16 +32,23 @@ public class DropboxManager {
     dropboxApi.getSession().startOAuth2Authentication(context);
   }
 
-  public void finishAuthentication() {
+  public boolean isAuthenticated() {
+    return dropboxApi.getSession().isLinked();
+  }
+
+  public boolean finishAuthentication() {
     AndroidAuthSession session = dropboxApi.getSession();
     if (session.authenticationSuccessful()) {
       try {
         session.finishAuthentication();
         storeAuth(session);
+        return true;
       } catch (IllegalStateException e) {
         Toast.makeText(context, "Couldn't authenticate with Dropbox:" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        return false;
       }
     }
+    return false;
   }
 
   private void loadAuth(AndroidAuthSession session) {
