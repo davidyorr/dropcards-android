@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="dropbox_blue">#007ee5</color>
+  <color name="dropbox_blue_700">#005fac</color>
 </resources>
