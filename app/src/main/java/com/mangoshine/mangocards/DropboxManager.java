@@ -5,8 +5,15 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.Toast;
 import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.DropboxAPI.Entry;
 import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AppKeyPair;
+import com.mangoshine.mangocards.data.Deck;
+import java.util.ArrayList;
+import java.util.List;
+import rx.Observable;
+import rx.Subscriber;
 
 public class DropboxManager {
   private Context context;
@@ -26,6 +33,28 @@ public class DropboxManager {
 
     AndroidAuthSession session = buildSession();
     dropboxApi = new DropboxAPI<>(session);
+  }
+
+  public Observable<List<Deck>> getDecks() {
+    return Observable.create(new Observable.OnSubscribe<List<Deck>>() {
+      @Override public void call(Subscriber<? super List<Deck>> observer) {
+        List<Deck> decks = new ArrayList<>();
+        try {
+          if (!observer.isUnsubscribed()) {
+            Entry metadata = dropboxApi.metadata("/", 100, "", true, "");
+            for (Entry deck : metadata.contents) {
+              if (deck.fileName().endsWith(".txt")) {
+                decks.add(new Deck(deck.fileName().substring(0, deck.fileName().lastIndexOf(".txt"))));
+              }
+            }
+            observer.onNext(decks);
+            observer.onCompleted();
+          }
+        } catch (DropboxException e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
 
   public void startOAuth2Authentication() {
