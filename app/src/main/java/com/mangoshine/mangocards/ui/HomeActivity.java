@@ -48,7 +48,10 @@ public class HomeActivity extends Activity implements HomeView {
   }
 
   @Override public void showDecks(List<Deck> decks) {
-    decksAdapter = new DecksAdapter(decks, R.layout.row_deck);
+    decksAdapter = new DecksAdapter(decks, R.layout.row_deck, presenter.getDeckClickListener());
     recyclerView.setAdapter(decksAdapter);
+  }
+
+  @Override public void viewDeck(String name) {
   }
 }

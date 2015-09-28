@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface HomeView {
   void showDecks(List<Deck> decks);
+
+  void viewDeck(String name);
 }

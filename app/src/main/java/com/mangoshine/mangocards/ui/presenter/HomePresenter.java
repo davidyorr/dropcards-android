@@ -1,7 +1,10 @@
 package com.mangoshine.mangocards.ui.presenter;
 
+import android.view.View;
+import android.widget.TextView;
 import com.mangoshine.mangocards.DropboxManager;
 import com.mangoshine.mangocards.data.Deck;
+import com.mangoshine.mangocards.ui.DecksAdapter;
 import com.mangoshine.mangocards.ui.view.HomeView;
 import java.util.List;
 import rx.Subscriber;
@@ -12,6 +15,11 @@ public class HomePresenter {
   private HomeView view;
   private DropboxManager dropboxManager;
   private List<Deck> decks;
+  private DecksAdapter.ViewHolder.ClickListener deckClickListener = new DecksAdapter.ViewHolder.ClickListener() {
+    @Override public void onClick(View v, TextView textView) {
+      view.viewDeck(textView.getText().toString());
+    }
+  };
 
   private Subscriber<List<Deck>> subscriber;
 
@@ -43,5 +51,9 @@ public class HomePresenter {
 
   public void onDeckNamesFetched() {
     view.showDecks(decks);
+  }
+
+  public DecksAdapter.ViewHolder.ClickListener getDeckClickListener() {
+    return deckClickListener;
   }
 }
