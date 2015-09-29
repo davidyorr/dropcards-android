@@ -20,7 +20,7 @@ public class LoginActivity extends Activity implements LoginView {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this, dropboxManager)).inject(this);
+    ((MangocardsApp) getApplication()).component().plus(new LoginModule(this)).inject(this);
 
     setContentView(R.layout.activity_login);
     ButterKnife.bind(this);

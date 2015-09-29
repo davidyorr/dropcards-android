@@ -33,7 +33,7 @@ public class HomeActivity extends Activity implements HomeView {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((MangocardsApp) getApplication()).component().plus(new HomeModule(this, dropboxManager)).inject(this);
+    ((MangocardsApp) getApplication()).component().plus(new HomeModule(this)).inject(this);
 
     setContentView(R.layout.activity_home);
     ButterKnife.bind(this);

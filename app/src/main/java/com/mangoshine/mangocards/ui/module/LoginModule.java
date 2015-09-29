@@ -10,9 +10,8 @@ import dagger.Provides;
 @Module
 public class LoginModule {
   private LoginView loginView;
-  private DropboxManager dropboxManager;
 
-  public LoginModule(LoginView loginView, DropboxManager dropboxManager) {
+  public LoginModule(LoginView loginView) {
     this.loginView = loginView;
   }
 

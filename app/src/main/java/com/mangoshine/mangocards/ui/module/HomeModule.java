@@ -10,9 +10,8 @@ import dagger.Provides;
 @Module
 public class HomeModule {
   private HomeView homeView;
-  private DropboxManager dropboxManager;
 
-  public HomeModule(HomeView homeView, DropboxManager dropboxManager) {
+  public HomeModule(HomeView homeView) {
     this.homeView = homeView;
   }
 
