@@ -1,5 +1,6 @@
 package com.mangoshine.mangocards.ui.module;
 
+import com.mangoshine.mangocards.DropboxManager;
 import com.mangoshine.mangocards.ui.PerActivity;
 import com.mangoshine.mangocards.ui.presenter.FlashcardsPresenter;
 import com.mangoshine.mangocards.ui.view.FlashcardsView;
@@ -16,7 +17,7 @@ public class FlashcardsModule {
 
   @Provides
   @PerActivity
-  FlashcardsPresenter provideFlashcardsPresenter() {
-    return new FlashcardsPresenter(flashcardsView);
+  FlashcardsPresenter provideFlashcardsPresenter(DropboxManager dropboxManager) {
+    return new FlashcardsPresenter(flashcardsView, dropboxManager);
   }
 }

@@ -1,11 +1,46 @@
 package com.mangoshine.mangocards.ui.presenter;
 
+import com.mangoshine.mangocards.DropboxManager;
+import com.mangoshine.mangocards.data.Deck;
 import com.mangoshine.mangocards.ui.view.FlashcardsView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class FlashcardsPresenter {
-  FlashcardsView view;
+  private FlashcardsView view;
+  private DropboxManager dropboxManager;
+  Deck deck;
 
-  public FlashcardsPresenter(FlashcardsView view) {
+  private Subscriber<Deck> subscriber;
+
+  public FlashcardsPresenter(FlashcardsView view,  DropboxManager dropboxManager) {
     this.view = view;
+    this.dropboxManager = dropboxManager;
+  }
+
+  public void initDeck(String name) {
+    subscriber = new Subscriber<Deck>() {
+      @Override public void onCompleted() {
+        onDeckFetched();
+      }
+
+      @Override public void onError(Throwable e) {
+        e.printStackTrace();
+      }
+
+      @Override public void onNext(Deck deck) {
+        FlashcardsPresenter.this.deck = deck;
+      }
+    };
+
+    dropboxManager.getDeck(name)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(subscriber);
+  }
+
+  public void onDeckFetched() {
+    view.loadDeck(deck);
   }
 }

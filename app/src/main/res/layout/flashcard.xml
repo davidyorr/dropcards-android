@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/flashcard_pager_adapter"
+    <TextView
+        android:id="@+id/flashcard_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:textSize="32sp"
+        android:gravity="center"/>
 
 </LinearLayout>

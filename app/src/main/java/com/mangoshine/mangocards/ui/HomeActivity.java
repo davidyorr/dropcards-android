@@ -55,6 +55,7 @@ public class HomeActivity extends Activity implements HomeView {
 
   @Override public void viewDeck(String name) {
     Intent intent = new Intent(this, FlashcardsActivity.class);
+    intent.putExtra(DropboxManager.DECK_NAME, name);
     startActivity(intent);
   }
 }

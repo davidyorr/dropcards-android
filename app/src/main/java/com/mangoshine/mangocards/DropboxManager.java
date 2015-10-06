@@ -10,6 +10,8 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AppKeyPair;
 import com.mangoshine.mangocards.data.Deck;
+import com.mangoshine.mangocards.data.InvalidFileFormatException;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Observable;
@@ -24,6 +26,8 @@ public class DropboxManager {
   private final String ACCOUNT_PREFS_NAME = "prefs";
   private final String ACCESS_KEY_NAME = "ACCESS_KEY";
   private final String ACCESS_SECRET_NAME = "ACCESS_SECRET";
+
+  public static final String DECK_NAME = "DECK_NAME";
 
   DropboxAPI<AndroidAuthSession> dropboxApi;
 
@@ -49,6 +53,28 @@ public class DropboxManager {
             }
             observer.onNext(decks);
             observer.onCompleted();
+          }
+        } catch (DropboxException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
+
+  public Observable<Deck> getDeck(final String file) {
+    return Observable.create(new Observable.OnSubscribe<Deck>() {
+      @Override public void call(Subscriber<? super Deck> observer) {
+        try {
+          ByteArrayOutputStream os = new ByteArrayOutputStream();
+          if (!observer.isUnsubscribed()) {
+            dropboxApi.getFile("/"+file+".txt", null, os, null);
+          }
+          try {
+            Deck deck = Deck.parseDeck(file, os.toString());
+            observer.onNext(deck);
+            observer.onCompleted();
+          } catch (InvalidFileFormatException e) {
+            observer.onError(e);
           }
         } catch (DropboxException e) {
           e.printStackTrace();
