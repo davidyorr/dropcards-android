@@ -1,10 +1,14 @@
 package com.mangoshine.mangocards.data;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mangoshine.mangocards.R;
@@ -40,6 +44,19 @@ public class DeckPagerAdapter extends PagerAdapter {
         Card card = deck.getCard(position);
         card.flip();
         flashcardTv.setText(card.getContent());
+      }
+    });
+
+    view.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override public boolean onLongClick(View v) {
+        Dialog dialog = new Dialog(v.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
+        dialog.setContentView(R.layout.flashcard_popup_settings);
+        dialog.setCanceledOnTouchOutside(true);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        dialog.show();
+        return true;
       }
     });
 
