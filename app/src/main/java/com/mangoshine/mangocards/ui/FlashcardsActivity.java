@@ -37,7 +37,7 @@ public class FlashcardsActivity extends Activity implements FlashcardsView {
   }
 
   @Override public void loadDeck(Deck deck) {
-    deckPagerAdapter = new DeckPagerAdapter(this, deck);
+    deckPagerAdapter = new DeckPagerAdapter(this, deck, presenter);
     flashcardPagerAdapter.setAdapter(deckPagerAdapter);
   }
 }

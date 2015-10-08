@@ -12,15 +12,18 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mangoshine.mangocards.R;
+import com.mangoshine.mangocards.ui.presenter.FlashcardsPresenter;
 
 public class DeckPagerAdapter extends PagerAdapter {
 
   private static LayoutInflater inflater = null;
   private Deck deck;
+  private FlashcardsPresenter presenter;
 
-  public DeckPagerAdapter(Context context, Deck deck) {
+  public DeckPagerAdapter(Context context, Deck deck, FlashcardsPresenter presenter) {
     inflater = LayoutInflater.from(context);
     this.deck = deck;
+    this.presenter = presenter;
   }
 
   @Override
@@ -49,12 +52,20 @@ public class DeckPagerAdapter extends PagerAdapter {
 
     view.setOnLongClickListener(new View.OnLongClickListener() {
       @Override public boolean onLongClick(View v) {
-        Dialog dialog = new Dialog(v.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
+        final Dialog dialog = new Dialog(v.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(R.layout.flashcard_popup_settings);
         dialog.setCanceledOnTouchOutside(true);
         Window window = dialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
         window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
+        dialog.findViewById(R.id.popup_shuffle_btn).setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View v) {
+            presenter.shuffleDeck();
+            dialog.hide();
+          }
+        });
+
         dialog.show();
         return true;
       }

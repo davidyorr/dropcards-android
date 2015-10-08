@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -30,6 +31,10 @@ public class Deck {
 
   public int size() {
     return cards.size();
+  }
+
+  public void shuffle() {
+    Collections.shuffle(cards);
   }
 
   public static Deck parseDeck(String name, String content) throws InvalidFileFormatException {

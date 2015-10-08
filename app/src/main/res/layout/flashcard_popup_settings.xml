@@ -5,10 +5,15 @@
     android:layout_height="match_parent"
     android:padding="@dimen/popup_window_padding">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="POPUP Settings"/>
+    <Button
+        android:id="@+id/popup_shuffle_btn"
+        android:layout_width="@dimen/popup_setting_diameter"
+        android:layout_height="@dimen/popup_setting_diameter"
+        android:text="@string/shuffle"
+        android:textAllCaps="false"
+        android:textColor="@color/popup_setting_title_color"
+        android:elevation="@dimen/default_elevation"
+        android:background="@drawable/round_button"
+        />
 
 </LinearLayout>

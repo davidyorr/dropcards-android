@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+  <solid android:color="@color/popup_setting_background"/>
+  <corners android:bottomRightRadius="@dimen/popup_setting_diameter"
+    android:bottomLeftRadius="@dimen/popup_setting_diameter"
+    android:topLeftRadius="@dimen/popup_setting_diameter"
+    android:topRightRadius="@dimen/popup_setting_diameter"/>
+
+</shape>

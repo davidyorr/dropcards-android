@@ -2,4 +2,6 @@
 <resources>
   <color name="dropbox_blue">#007ee5</color>
   <color name="dropbox_blue_700">#005fac</color>
+  <color name="popup_setting_background">#FBC02D</color>
+  <color name="popup_setting_title_color">#FFF</color>
 </resources>

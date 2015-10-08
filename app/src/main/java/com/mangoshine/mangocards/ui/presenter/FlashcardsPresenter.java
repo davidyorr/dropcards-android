@@ -43,4 +43,9 @@ public class FlashcardsPresenter {
   public void onDeckFetched() {
     view.loadDeck(deck);
   }
+
+  public void shuffleDeck() {
+    deck.shuffle();
+    view.loadDeck(deck);
+  }
 }
