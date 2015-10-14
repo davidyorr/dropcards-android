@@ -29,6 +29,8 @@ public class HomePresenter {
   }
 
   public void populateCardView() {
+    view.showLoading();
+
     subscriber = new Subscriber<List<Deck>>() {
       @Override public void onCompleted() {
         onDeckNamesFetched();
@@ -50,6 +52,7 @@ public class HomePresenter {
   }
 
   public void onDeckNamesFetched() {
+    view.hideLoading();
     view.showDecks(decks);
   }
 

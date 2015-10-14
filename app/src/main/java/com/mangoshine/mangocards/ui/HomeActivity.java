@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 public class HomeActivity extends Activity implements HomeView {
 
   @Bind(R.id.toolbar) Toolbar toolbar;
+  @Bind(R.id.home_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
   @Bind(R.id.main_drawer_layout) DrawerLayout drawerLayout;
   @Bind(R.id.decks) RecyclerView recyclerView;
   DecksAdapter decksAdapter;
@@ -37,6 +39,11 @@ public class HomeActivity extends Activity implements HomeView {
 
     setContentView(R.layout.activity_home);
     ButterKnife.bind(this);
+    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override public void onRefresh() {
+        presenter.populateCardView();
+      }
+    });
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     presenter.populateCardView();
@@ -57,5 +64,13 @@ public class HomeActivity extends Activity implements HomeView {
     Intent intent = new Intent(this, FlashcardsActivity.class);
     intent.putExtra(DropboxManager.DECK_NAME, name);
     startActivity(intent);
+  }
+
+  @Override public void showLoading() {
+    swipeRefreshLayout.setRefreshing(true);
+  }
+
+  @Override public void hideLoading() {
+    swipeRefreshLayout.setRefreshing(false);
   }
 }

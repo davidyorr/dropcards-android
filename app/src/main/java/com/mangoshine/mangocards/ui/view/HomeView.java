@@ -7,4 +7,8 @@ public interface HomeView {
   void showDecks(List<Deck> decks);
 
   void viewDeck(String name);
+
+  void showLoading();
+
+  void hideLoading();
 }
