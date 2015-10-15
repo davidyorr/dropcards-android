@@ -1,6 +1,7 @@
 package com.mangoshine.mangocards.ui.presenter;
 
 import com.mangoshine.mangocards.DropboxManager;
+import com.mangoshine.mangocards.SettingsManager;
 import com.mangoshine.mangocards.data.Deck;
 import com.mangoshine.mangocards.ui.view.FlashcardsView;
 import rx.Subscriber;
@@ -10,13 +11,15 @@ import rx.schedulers.Schedulers;
 public class FlashcardsPresenter {
   private FlashcardsView view;
   private DropboxManager dropboxManager;
+  private SettingsManager settingsManager;
   Deck deck;
 
   private Subscriber<Deck> subscriber;
 
-  public FlashcardsPresenter(FlashcardsView view,  DropboxManager dropboxManager) {
+  public FlashcardsPresenter(FlashcardsView view,  DropboxManager dropboxManager, SettingsManager settingsManager) {
     this.view = view;
     this.dropboxManager = dropboxManager;
+    this.settingsManager = settingsManager;
   }
 
   public void initDeck(String name) {
