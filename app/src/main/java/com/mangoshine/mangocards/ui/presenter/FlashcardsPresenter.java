@@ -51,4 +51,9 @@ public class FlashcardsPresenter {
     deck.shuffle();
     view.loadDeck(deck);
   }
+
+  public void flipCard(int position) {
+    deck.getCard(position).flip();
+    view.onCardFlipped();
+  }
 }

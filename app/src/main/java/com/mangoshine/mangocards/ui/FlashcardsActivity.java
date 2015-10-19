@@ -40,4 +40,8 @@ public class FlashcardsActivity extends Activity implements FlashcardsView {
     deckPagerAdapter = new DeckPagerAdapter(this, deck, presenter);
     flashcardPagerAdapter.setAdapter(deckPagerAdapter);
   }
+
+  @Override public void onCardFlipped() {
+    flashcardPagerAdapter.getAdapter().notifyDataSetChanged();
+  }
 }

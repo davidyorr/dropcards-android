@@ -44,9 +44,7 @@ public class DeckPagerAdapter extends PagerAdapter {
 
     view.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Card card = deck.getCard(position);
-        card.flip();
-        flashcardTv.setText(card.getContent());
+        presenter.flipCard(position);
       }
     });
 
@@ -78,5 +76,10 @@ public class DeckPagerAdapter extends PagerAdapter {
   @Override
   public void destroyItem(ViewGroup collection, int position, Object view) {
     collection.removeView((LinearLayout) view);
+  }
+
+  @Override
+  public int getItemPosition(Object object) {
+    return POSITION_NONE;
   }
 }

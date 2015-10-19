@@ -4,4 +4,6 @@ import com.mangoshine.mangocards.data.Deck;
 
 public interface FlashcardsView {
   void loadDeck(Deck deck);
+
+  void onCardFlipped();
 }
