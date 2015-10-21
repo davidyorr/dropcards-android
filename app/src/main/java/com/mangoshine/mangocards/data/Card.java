@@ -3,7 +3,7 @@ package com.mangoshine.mangocards.data;
 public class Card {
   private String front, back;
 
-  Side currentSide = Side.FRONT;
+  private Side currentSide = Side.FRONT;
 
   public Card(String front, String back) {
     this.front = front;

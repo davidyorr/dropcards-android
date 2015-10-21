@@ -58,12 +58,12 @@ public class FlashcardsPresenter {
     view.onCardFlipped();
   }
 
-  public void increaseFontSize() {
-    setFontSize(deck.getCurrentSide(), 1);
+  public void increaseFontSize(Side side) {
+    setFontSize(side, 1);
   }
 
-  public void decreseFontSize() {
-    setFontSize(deck.getCurrentSide(), -1);
+  public void decreseFontSize(Side side) {
+    setFontSize(side, -1);
   }
 
   private void setFontSize(Side side, int amount) {

@@ -37,10 +37,6 @@ public class Deck {
     Collections.shuffle(cards);
   }
 
-  public Side getCurrentSide() {
-    return getCard(0).getCurrentSide();
-  }
-
   public static Deck parseDeck(String name, String content) throws InvalidFileFormatException {
     Deck deck = new Deck(name);
     try {

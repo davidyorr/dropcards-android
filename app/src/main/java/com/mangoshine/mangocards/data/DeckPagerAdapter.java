@@ -82,14 +82,14 @@ public class DeckPagerAdapter extends PagerAdapter {
 
         dialog.findViewById(R.id.popup_increase_font_btn).setOnClickListener(new View.OnClickListener() {
           @Override public void onClick(View v) {
-            presenter.increaseFontSize();
+            presenter.increaseFontSize(card.getCurrentSide());
             refreshFontSize(flashcardFrontTv, flashcardBackTv);
           }
         });
 
         dialog.findViewById(R.id.popup_decrease_font_btn).setOnClickListener(new View.OnClickListener() {
           @Override public void onClick(View v) {
-            presenter.decreseFontSize();
+            presenter.decreseFontSize(card.getCurrentSide());
             refreshFontSize(flashcardFrontTv, flashcardBackTv);
           }
         });
