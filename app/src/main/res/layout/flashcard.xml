@@ -8,6 +8,7 @@
         android:id="@+id/flashcard_front_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/flashcard_padding"
         android:textSize="32sp"
         android:gravity="center"/>
 
@@ -15,6 +16,7 @@
         android:id="@+id/flashcard_back_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/flashcard_padding"
         android:textSize="32sp"
         android:gravity="center"/>
 

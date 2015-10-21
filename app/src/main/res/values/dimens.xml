@@ -6,4 +6,5 @@
   <dimen name="popup_setting_text_size">12sp</dimen>
   <dimen name="popup_setting_plus_minus_text_size">18sp</dimen>
   <dimen name="popup_setting_button_margin">4dp</dimen>
+  <dimen name="flashcard_padding">16dp</dimen>
 </resources>
