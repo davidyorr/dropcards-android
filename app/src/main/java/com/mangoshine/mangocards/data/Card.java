@@ -1,7 +1,7 @@
 package com.mangoshine.mangocards.data;
 
 public class Card {
-  String front, back;
+  private String front, back;
 
   Side currentSide = Side.FRONT;
 
@@ -16,5 +16,17 @@ public class Card {
 
   public void flip() {
     currentSide = currentSide == Side.FRONT ? Side.BACK : Side.FRONT;
+  }
+
+  public Side getCurrentSide() {
+    return currentSide;
+  }
+
+  public String front() {
+    return front;
+  }
+
+  public String back() {
+    return back;
   }
 }

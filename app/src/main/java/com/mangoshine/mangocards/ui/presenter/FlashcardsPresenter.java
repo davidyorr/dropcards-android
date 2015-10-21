@@ -3,6 +3,7 @@ package com.mangoshine.mangocards.ui.presenter;
 import com.mangoshine.mangocards.DropboxManager;
 import com.mangoshine.mangocards.SettingsManager;
 import com.mangoshine.mangocards.data.Deck;
+import com.mangoshine.mangocards.data.Side;
 import com.mangoshine.mangocards.ui.view.FlashcardsView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -55,5 +56,21 @@ public class FlashcardsPresenter {
   public void flipCard(int position) {
     deck.getCard(position).flip();
     view.onCardFlipped();
+  }
+
+  public void increaseFontSize() {
+    setFontSize(deck.getCurrentSide(), 1);
+  }
+
+  public void decreseFontSize() {
+    setFontSize(deck.getCurrentSide(), -1);
+  }
+
+  private void setFontSize(Side side, int amount) {
+    if (side == Side.FRONT) {
+      settingsManager.setFrontCardFontSize(settingsManager.getFrontCardFontSize() + amount);
+    } else {
+      settingsManager.setBackCardFontSize(settingsManager.getBackCardFontSize() + amount);
+    }
   }
 }

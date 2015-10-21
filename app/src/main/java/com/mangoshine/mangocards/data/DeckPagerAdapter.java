@@ -12,18 +12,22 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mangoshine.mangocards.R;
+import com.mangoshine.mangocards.SettingsManager;
 import com.mangoshine.mangocards.ui.presenter.FlashcardsPresenter;
+import timber.log.Timber;
 
 public class DeckPagerAdapter extends PagerAdapter {
 
   private static LayoutInflater inflater = null;
   private Deck deck;
   private FlashcardsPresenter presenter;
+  private SettingsManager settingsManager;
 
-  public DeckPagerAdapter(Context context, Deck deck, FlashcardsPresenter presenter) {
+  public DeckPagerAdapter(Context context, Deck deck, FlashcardsPresenter presenter, SettingsManager settingsManager) {
     inflater = LayoutInflater.from(context);
     this.deck = deck;
     this.presenter = presenter;
+    this.settingsManager = settingsManager;
   }
 
   @Override
@@ -39,8 +43,20 @@ public class DeckPagerAdapter extends PagerAdapter {
   @Override
   public Object instantiateItem(ViewGroup collection, final int position) {
     View view = inflater.inflate(R.layout.flashcard, null);
-    final TextView flashcardTv = (TextView)view.findViewById(R.id.flashcard_tv);
-    flashcardTv.setText(deck.getCard(position).getContent());
+    final Card card = deck.getCard(position);
+    final TextView flashcardFrontTv = (TextView)view.findViewById(R.id.flashcard_front_tv);
+    final TextView flashcardBackTv = (TextView)view.findViewById(R.id.flashcard_back_tv);
+    refreshFontSize(flashcardFrontTv, flashcardBackTv);
+    flashcardFrontTv.setText(card.front());
+    flashcardBackTv.setText(card.back());
+
+    if (card.getCurrentSide() == Side.FRONT) {
+      flashcardFrontTv.setVisibility(View.VISIBLE);
+      flashcardBackTv.setVisibility(View.GONE);
+    } else {
+      flashcardFrontTv.setVisibility(View.GONE);
+      flashcardBackTv.setVisibility(View.VISIBLE);
+    }
 
     view.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
@@ -64,6 +80,20 @@ public class DeckPagerAdapter extends PagerAdapter {
           }
         });
 
+        dialog.findViewById(R.id.popup_increase_font_btn).setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View v) {
+            presenter.increaseFontSize();
+            refreshFontSize(flashcardFrontTv, flashcardBackTv);
+          }
+        });
+
+        dialog.findViewById(R.id.popup_decrease_font_btn).setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View v) {
+            presenter.decreseFontSize();
+            refreshFontSize(flashcardFrontTv, flashcardBackTv);
+          }
+        });
+
         dialog.show();
         return true;
       }
@@ -81,5 +111,19 @@ public class DeckPagerAdapter extends PagerAdapter {
   @Override
   public int getItemPosition(Object object) {
     return POSITION_NONE;
+  }
+
+  @Override public void startUpdate(ViewGroup container) {
+    super.startUpdate(container);
+    Timber.d("startUpdate()");
+    for (int i = 0; i < container.getChildCount(); i++) {
+      View v = container.getChildAt(i);
+      refreshFontSize((TextView) v.findViewById(R.id.flashcard_front_tv), (TextView) v.findViewById(R.id.flashcard_back_tv));
+    }
+  }
+
+  public void refreshFontSize(TextView flashcardFrontTv, TextView flashcardBackTv) {
+    flashcardFrontTv.setTextSize(settingsManager.getFrontCardFontSize());
+    flashcardBackTv.setTextSize(settingsManager.getBackCardFontSize());
   }
 }

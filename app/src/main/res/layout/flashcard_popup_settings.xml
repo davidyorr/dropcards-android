@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:padding="@dimen/popup_window_padding">
 
     <Button
@@ -13,6 +14,33 @@
         android:text="@string/shuffle"
         android:textAllCaps="false"
         android:textColor="@color/popup_setting_title_color"
+        android:textSize="@dimen/popup_setting_text_size"
+        android:background="@drawable/round_button"
+        style="?android:borderlessButtonStyle"
+        />
+
+    <Button
+        android:id="@+id/popup_increase_font_btn"
+        android:layout_width="@dimen/popup_setting_diameter"
+        android:layout_height="@dimen/popup_setting_diameter"
+        android:layout_margin="@dimen/popup_setting_button_margin"
+        android:text="@string/increase_font"
+        android:textAllCaps="false"
+        android:textColor="@color/popup_setting_title_color"
+        android:textSize="@dimen/popup_setting_plus_minus_text_size"
+        android:background="@drawable/round_button"
+        style="?android:borderlessButtonStyle"
+        />
+
+    <Button
+        android:id="@+id/popup_decrease_font_btn"
+        android:layout_width="@dimen/popup_setting_diameter"
+        android:layout_height="@dimen/popup_setting_diameter"
+        android:layout_margin="@dimen/popup_setting_button_margin"
+        android:text="@string/decrease_font"
+        android:textAllCaps="false"
+        android:textColor="@color/popup_setting_title_color"
+        android:textSize="@dimen/popup_setting_plus_minus_text_size"
         android:background="@drawable/round_button"
         style="?android:borderlessButtonStyle"
         />

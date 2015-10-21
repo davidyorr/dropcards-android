@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 import com.mangoshine.mangocards.DropboxManager;
 import com.mangoshine.mangocards.MangocardsApp;
 import com.mangoshine.mangocards.R;
+import com.mangoshine.mangocards.SettingsManager;
 import com.mangoshine.mangocards.data.Deck;
 import com.mangoshine.mangocards.data.DeckPagerAdapter;
 import com.mangoshine.mangocards.ui.module.FlashcardsModule;
@@ -22,6 +23,7 @@ public class FlashcardsActivity extends Activity implements FlashcardsView {
 
   @Inject FlashcardsPresenter presenter;
   @Inject DropboxManager dropboxManager;
+  @Inject SettingsManager settingsManager;
   DeckPagerAdapter deckPagerAdapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class FlashcardsActivity extends Activity implements FlashcardsView {
   }
 
   @Override public void loadDeck(Deck deck) {
-    deckPagerAdapter = new DeckPagerAdapter(this, deck, presenter);
+    deckPagerAdapter = new DeckPagerAdapter(this, deck, presenter, settingsManager);
     flashcardPagerAdapter.setAdapter(deckPagerAdapter);
   }
 
